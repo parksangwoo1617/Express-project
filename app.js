@@ -4,18 +4,22 @@ const morgan = require('morgan');
 const path = require('path');
 const session = require('express-session');
 const flash = require('connect-flash');
+const cons = require('consolidate');
 require('dotenv').config();
 
 const pageRouter = require('./routes/page');
+const { sequelize } = require('./models');
 
 const app = express();
+sequelize.sync();
 
+app.engine('html', cons.swig);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 app.set('port', process.env.PORT || 8001);
 
 app.use(morgan('dev'));
-app.use(expressstatic(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
@@ -28,7 +32,7 @@ app.use(session({
         secure: false,
     },
 }));
-app.use(falsh());
+app.use(flash());
 
 app.use('/', pageRouter);
 
