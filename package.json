@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/parksangwoo1617/Express-project#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "connect-flash": "^0.1.1",
     "consolidate": "^0.16.0",
     "cookie-parser": "^1.4.5",
@@ -25,6 +26,9 @@
     "express-session": "^1.17.1",
     "morgan": "^1.10.0",
     "mysql2": "^2.2.5",
+    "passport": "^0.4.1",
+    "passport-kakao": "^1.0.1",
+    "passport-local": "^1.0.0",
     "pug": "^3.0.2",
     "sequelize": "^6.5.0",
     "swig": "^1.4.2"
