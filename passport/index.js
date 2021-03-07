@@ -8,7 +8,18 @@ module.exports = (passport) => {
     });
 
     passport.deserializeUser((id, done) => { //사용자 정보 불러오기
-        User.findOne({ where: { id } })
+        User.findOne({
+            where: { id },
+            include: [{
+                model: User,
+                attributes: ['id', 'nick'],
+                as: 'Followers',
+            }, {
+                model: User,
+                attributes: ['id', 'nick'],
+                as: 'Followings',
+            }],
+        })
             .then(user => done(null, user))
             .catch(err => done(err));
     });
